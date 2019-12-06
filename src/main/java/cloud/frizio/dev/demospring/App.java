@@ -10,6 +10,8 @@ public class App {
     Coach theCoach = context.getBean("myCoach", Coach.class);
     // Call methods on the bean
     System.out.println(theCoach.getDailyWorkout());
+    // Call method to get the fortune
+    System.out.println(theCoach.getLuckyFortune());
     // Close the context
     context.close();
   }

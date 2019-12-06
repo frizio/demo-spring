@@ -10,7 +10,12 @@
   <!-- Define your beans here -->
 
   <!-- define the dependency -->
-  <bean id="myCoach" class="cloud.frizio.dev.demospring.FootballCoach"></bean>
+  <bean id="myFortuneService" class="cloud.frizio.dev.demospring.fortune.HappyFortuneService"></bean>
+
+  <bean id="myCoach" class="cloud.frizio.dev.demospring.FootballCoach">
+    <!-- Set un constructor injection -->
+    <constructor-arg ref="myFortuneService"></constructor-arg>
+  </bean>
 
   <!-- -->
   <bean id="myLoggerConfiguration" class="cloud.frizio.dev.demospring.LoggerConfiguration" init-method="initLogger">
