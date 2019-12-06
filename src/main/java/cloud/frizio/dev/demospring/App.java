@@ -3,6 +3,9 @@ package cloud.frizio.dev.demospring;
 
 public class App {
     public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+        // Create the object
+        BaseballCoach theCoach = new BaseballCoach();
+        // Use the object
+        System.out.println(theCoach.getDailyWorkout());
     }
 }
