@@ -10,7 +10,7 @@
   <!-- Define your beans here -->
 
   <!-- define the dependency -->
-  <bean id="myCoach" class="cloud.frizio.dev.demospring.BaseballCoach"></bean>
+  <bean id="myCoach" class="cloud.frizio.dev.demospring.FootballCoach"></bean>
 
   <!-- -->
   <bean id="myLoggerConfiguration" class="cloud.frizio.dev.demospring.LoggerConfiguration" init-method="initLogger">
