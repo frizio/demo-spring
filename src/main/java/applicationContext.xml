@@ -13,9 +13,14 @@
   <bean id="myFortuneService" class="cloud.frizio.dev.demospring.fortune.HappyFortuneService"></bean>
 
   <bean id="myCoach" class="cloud.frizio.dev.demospring.FootballCoach">
-    <!-- Set un constructor injection -->
+    <!-- Constructor injection -->
     <constructor-arg ref="myFortuneService"></constructor-arg>
   </bean>
+
+  <bean id="myTrackCoach" class="cloud.frizio.dev.demospring.TrackCoach">
+      <!-- Setter injection -->
+      <property name="fortuneService" ref="myFortuneService"></property>
+    </bean>
 
   <!-- -->
   <bean id="myLoggerConfiguration" class="cloud.frizio.dev.demospring.LoggerConfiguration" init-method="initLogger">
