@@ -20,6 +20,11 @@
   <bean id="myTrackCoach" class="cloud.frizio.dev.demospring.TrackCoach">
       <!-- Setter injection -->
       <property name="fortuneService" ref="myFortuneService"></property>
+
+      <!-- Inject litaral values -->
+      <property name="emailAddress" value="coach@email.com"></property>
+      <property name="team" value="FrizioTeam"></property>
+
     </bean>
 
   <!-- -->
