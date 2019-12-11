@@ -1,9 +1,15 @@
 package cloud.frizio.dev.demospring;
 
-import org.springframework.stereotype.Component;
+import cloud.frizio.dev.demospring.fortune.FortuneService;
 
-@Component
+
 public class BasketCoach implements Coach {
+
+  private FortuneService fortuneService;
+
+  public BasketCoach(FortuneService fortuneService) {
+    this.fortuneService = fortuneService;
+  }
 
   @Override
   public String getDailyWorkout() {
@@ -12,7 +18,7 @@ public class BasketCoach implements Coach {
 
   @Override
   public String getDailyFortune() {
-    return null;
+    return this.fortuneService.getFortune();
   }
 
   
