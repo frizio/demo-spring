@@ -10,7 +10,7 @@ import cloud.frizio.dev.demospring.fortune.FortuneService;
 public class TennisCoach implements Coach {
 
   @Autowired
-  @Qualifier("randomFortuneService")
+  @Qualifier("RESTFortuneService")
   private FortuneService fortuneService;
 
   public TennisCoach() {
