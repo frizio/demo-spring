@@ -10,7 +10,7 @@ public class App {
         new ClassPathXmlApplicationContext("applicationContext.xml");
     
     // Get the bean from the container
-    Coach theCoach = context.getBean("thatSillyCoach", Coach.class);
+    Coach theCoach = context.getBean("tennisCoach", Coach.class);
 
     // Call a method on the bean
     System.out.println(theCoach.getDailyWorkout());
