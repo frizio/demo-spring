@@ -9,11 +9,17 @@ public class App {
     ClassPathXmlApplicationContext context = 
         new ClassPathXmlApplicationContext("applicationContext.xml");
     
-    // Get the bean from the container
+    // Retrieve bean from spring container
     Coach theCoach = context.getBean("tennisCoach", Coach.class);
 
-    System.out.println(theCoach.getDailyWorkout());
-    System.out.println(theCoach.getDailyFortune());
+    Coach alphaCoach = context.getBean("tennisCoach", Coach.class);
+    
+    // Check if the beans are the same (singleton)
+    boolean result = (theCoach == alphaCoach);
+    System.out.println("\nPointing to the same object? " + result);
+    System.out.println("\nMemory location for theCoach" + theCoach);
+    System.out.println("\nMemory location for alphaCoach" + alphaCoach);
+    System.out.println("\n");
 
     // Close the context
     context.close();
