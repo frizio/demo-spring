@@ -10,6 +10,11 @@ public class BasketCoach implements Coach {
     return "Try the shoots of three point";
   }
 
+  @Override
+  public String getDailyFortune() {
+    return null;
+  }
+
   
   
 }

@@ -12,10 +12,8 @@ public class App {
     // Get the bean from the container
     Coach theCoach = context.getBean("tennisCoach", Coach.class);
 
-    // Call a method on the bean
     System.out.println(theCoach.getDailyWorkout());
-
-    System.out.println(context.getBean("basketCoach", Coach.class).getDailyWorkout());
+    System.out.println(theCoach.getDailyFortune());
 
     // Close the context
     context.close();
