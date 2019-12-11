@@ -14,12 +14,6 @@ public class TennisCoach implements Coach {
     System.out.println("Call TennisCoach default constructor");
   }
 
-  @Autowired
-  public void setFortuneService(FortuneService fortuneService) {
-    System.out.println("Call setFortuneService");
-    this.fortuneService = fortuneService;
-  }
-
   @Override
   public String getDailyWorkout() {
     return "Practice your backhand volley";
@@ -28,6 +22,12 @@ public class TennisCoach implements Coach {
   @Override
   public String getDailyFortune() {
     return this.fortuneService.getFortune();
+  }
+
+  @Autowired
+  public void doSomeCrazyStuff(FortuneService fortuneService) {
+    System.out.println("Call doSomeCrazyStuff");
+    this.fortuneService = fortuneService;
   }
 
 }
