@@ -13,7 +13,7 @@
   <!-- define the dependency -->
   <bean id="myFortuneService" class="cloud.frizio.dev.demospring.fortune.HappyFortuneService"></bean>
 
-  <bean id="myCoach" class="cloud.frizio.dev.demospring.FootballCoach" scope="singleton">
+  <bean id="myCoach" class="cloud.frizio.dev.demospring.FootballCoach" scope="prototype">
     <!-- set up constructor injection -->
  		<constructor-arg ref="myFortuneService" />
   </bean>
