@@ -8,6 +8,7 @@ import cloud.frizio.dev.demospring.fortune.FortuneService;
 @Component
 public class TennisCoach implements Coach {
 
+  @Autowired
   private FortuneService fortuneService;
 
   public TennisCoach() {
@@ -22,12 +23,6 @@ public class TennisCoach implements Coach {
   @Override
   public String getDailyFortune() {
     return this.fortuneService.getFortune();
-  }
-
-  @Autowired
-  public void doSomeCrazyStuff(FortuneService fortuneService) {
-    System.out.println("Call doSomeCrazyStuff");
-    this.fortuneService = fortuneService;
   }
 
 }
