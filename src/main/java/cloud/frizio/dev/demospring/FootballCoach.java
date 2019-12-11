@@ -29,5 +29,16 @@ public class FootballCoach implements Coach {
     return "Just do it " + this.fortuneService.getFortune();
   }
 
+  // Init method
+  public void doMyStartupStuff() {
+    System.out.println("Call init method");
+    System.out.println("Open here db connection, sockets or files");
+  }
+
+  // Destroy method
+  public void doMyCleanupStuff() {
+    System.out.println("Call destroy method");
+    System.out.println("Close and cleanup here here db connection, sockets or files");
+  }
   
 }
