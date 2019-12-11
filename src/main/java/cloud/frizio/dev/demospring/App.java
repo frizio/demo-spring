@@ -15,6 +15,8 @@ public class App {
     // Call a method on the bean
     System.out.println(theCoach.getDailyWorkout());
 
+    System.out.println(context.getBean("basketCoach", Coach.class).getDailyWorkout());
+
     // Close the context
     context.close();
   }
