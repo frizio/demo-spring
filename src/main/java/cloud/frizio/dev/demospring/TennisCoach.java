@@ -1,13 +1,18 @@
 package cloud.frizio.dev.demospring;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cloud.frizio.dev.demospring.fortune.FortuneService;
 
 @Component
+@Scope("singleton")
 public class TennisCoach implements Coach {
 
   @Autowired
@@ -19,6 +24,11 @@ public class TennisCoach implements Coach {
 
   public TennisCoach() {
     System.out.println("Call TennisCoach default constructor");
+  }
+
+  @PostConstruct
+  public void init() {
+    System.out.println("Code executed after constructor and injection of the dependencies");
   }
 
   public String getTeam() {
@@ -33,6 +43,11 @@ public class TennisCoach implements Coach {
   @Override
   public String getDailyFortune() {
     return this.fortuneService.getFortune();
+  }
+
+  @PreDestroy
+  public void cleanup() {
+    System.out.println("Code executed before the bean is destroyed");
   }
 
 }
