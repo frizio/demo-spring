@@ -10,8 +10,13 @@ public class TennisCoach implements Coach {
 
   private FortuneService fortuneService;
 
+  public TennisCoach() {
+    System.out.println("Call TennisCoach default constructor");
+  }
+
   @Autowired
-  public TennisCoach(FortuneService fortuneService) {
+  public void setFortuneService(FortuneService fortuneService) {
+    System.out.println("Call setFortuneService");
     this.fortuneService = fortuneService;
   }
 
