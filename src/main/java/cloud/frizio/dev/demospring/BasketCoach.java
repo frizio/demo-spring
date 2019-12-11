@@ -1,11 +1,19 @@
 package cloud.frizio.dev.demospring;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import cloud.frizio.dev.demospring.fortune.FortuneService;
 
 
 public class BasketCoach implements Coach {
 
   private FortuneService fortuneService;
+
+  @Value("${foo.email}")
+  private String email;
+
+  @Value("${foo.team}")
+  private String team;
 
   public BasketCoach(FortuneService fortuneService) {
     this.fortuneService = fortuneService;
@@ -21,6 +29,19 @@ public class BasketCoach implements Coach {
     return this.fortuneService.getFortune();
   }
 
+  public String getEmail() {
+    return email;
+  }
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getTeam() {
+    return team;
+  }
+  public void setTeam(String team) {
+    this.team = team;
+  }
   
   
 }

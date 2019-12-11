@@ -10,10 +10,12 @@ public class App {
         new AnnotationConfigApplicationContext(SportConfiguration.class);
     
     // Retrieve bean from spring container
-    Coach theCoach = context.getBean("basketCoach", Coach.class);
+    BasketCoach theCoach = context.getBean("basketCoach", BasketCoach.class);
 
     System.out.println(theCoach.getDailyWorkout());
     System.out.println(theCoach.getDailyFortune());
+    System.out.println("Email: " + theCoach.getEmail());
+    System.out.println("Team:  " + theCoach.getTeam());
 
     // Close the context
     context.close();
