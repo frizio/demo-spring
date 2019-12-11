@@ -10,6 +10,10 @@ public class FootballCoach implements Coach {
   // Define a private field for the dependency
   private FortuneService fortuneService;
 
+  public FootballCoach() {
+    
+  }
+
   // Define a constructor for dependency injection
   public FootballCoach( FortuneService fortuneService ) {
     this.fortuneService = fortuneService;
