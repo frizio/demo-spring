@@ -26,7 +26,7 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
     states
       .withStates()
         .initial(OrderStates.CREATED)
-        .state(OrderStates.APPROVED)
+        .state( OrderStates.APPROVED, entryAction(), exitAction() )
         .end(OrderStates.DENIED)
         .end(OrderStates.CANCELLED)
         .end(OrderStates.PROCESSED);
@@ -94,5 +94,22 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
     return null;
   }
 
+  public Action<OrderStates, OrderEvents> entryAction() {
+    return new Action<OrderStates, OrderEvents>() {
+        @Override
+        public void execute(StateContext<OrderStates, OrderEvents> context) {
+            System.out.println( "Entering IN state " + context.getTarget().getId() );
+        }
+    };
+}
+    
+public Action<OrderStates, OrderEvents> exitAction() {
+    return new Action<OrderStates, OrderEvents>() {
+        @Override
+        public void execute(StateContext<OrderStates, OrderEvents> context) {
+            System.out.println( "Exiting FROM state " + context.getSource().getId() );
+        }
+    };
+}
 
 }
