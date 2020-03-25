@@ -1,0 +1,25 @@
+package cloud.frizio.dev.demospring.statemachine.order.automata;
+
+
+/*
+*  Enum che rappresenta gli STATI dell'automa.
+*/
+public enum OrderStates {
+
+  CREATED   ("New order"), 
+  APPROVED  ("Approved"),
+  CANCELLED ("Cancelled"),
+  DENIED    ("Denied"),
+  PROCESSED ("Processed");
+  
+  private String description;
+  
+  private OrderStates(String description) {
+    this.description = description;
+  }
+  
+  public String getDescription() {
+    return this.description;
+  }
+
+}
