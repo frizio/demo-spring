@@ -45,6 +45,7 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
         .source(OrderStates.CREATED)
         .target(OrderStates.DENIED)
         .event(OrderEvents.DENY)
+        .action( denyAction() )
       .and()
       .withExternal()
         .source(OrderStates.APPROVED)
@@ -70,6 +71,18 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
         }
       }
     };
+  }
+
+  public Action<OrderStates, OrderEvents> denyAction() {
+      return new Action<OrderStates, OrderEvents>() {
+        @Override
+        public void execute(StateContext<OrderStates, OrderEvents> context) {
+          Order order = findOrder( context.getExtendedState() );
+          if ( order != null ) {
+            order.setCancelDate( new Date() );
+          }
+        }
+      };
   }
 
   private Order findOrder( ExtendedState extendedState ) {
