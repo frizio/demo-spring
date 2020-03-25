@@ -1,12 +1,19 @@
 package cloud.frizio.dev.demospring.statemachine.order.automata;
 
+
+import java.util.Date;
+
 import org.springframework.context.annotation.Configuration;
+import org.springframework.statemachine.ExtendedState;
+import org.springframework.statemachine.StateContext;
+import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachineFactory;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 
+import cloud.frizio.dev.demospring.statemachine.order.bean.Order;
 
 @Configuration
 @EnableStateMachineFactory
@@ -32,6 +39,7 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
         .source(OrderStates.CREATED)
         .target(OrderStates.APPROVED)
         .event(OrderEvents.APPROVE)
+        .action( approveAction() )
       .and()
       .withExternal()
         .source(OrderStates.CREATED)
@@ -47,6 +55,30 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
         .source(OrderStates.APPROVED)
         .target(OrderStates.CANCELLED)
         .event(OrderEvents.CANCEL);
+  }
+ 
+  // Actions 
+  
+  public Action<OrderStates, OrderEvents> approveAction() {
+    return new Action<OrderStates, OrderEvents>() {
+      @Override
+      public void execute(StateContext<OrderStates, OrderEvents> context) {
+        Order order = findOrder( context.getExtendedState() );
+        if ( order != null ) {
+          order.setNumber( (int)(Math.random()*100000) );
+          order.setApprovalDate( new Date() );
+        }
+      }
+    };
+  }
+
+  private Order findOrder( ExtendedState extendedState ) {
+    for ( Object obj : extendedState.getVariables().values() ) {
+        if ( obj instanceof Order ) {
+            return (Order) obj;
+        }
+    }
+    return null;
   }
 
 
