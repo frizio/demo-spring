@@ -42,6 +42,7 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
         .target(OrderStates.APPROVED)
         .event(OrderEvents.APPROVE)
         .action( approveAction() )
+        .guard( budgetGuard( BigDecimal.valueOf( 100 ) ) )
       .and()
       .withExternal()
         .source(OrderStates.CREATED)
@@ -61,7 +62,7 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
   }
 
   //------------------------------------------------------------------------------------------------------
-  // ACTIONS
+  // ACTIONS -> execute()
   //------------------------------------------------------------------------------------------------------
     
     // Utilità:  Ricerca l’ordine tra le variabili memorizzate nell’extended state
@@ -120,9 +121,20 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
   }
 
   //---------------------------------------------------------------------------
-  // GUARDS
+  // GUARDS -> evaluate()
   //---------------------------------------------------------------------------
-
-  
+  // L’interfaccia Guard, che è utilizzata per “proteggere” le transizioni tra gli stati.
+  public Guard<OrderStates, OrderEvents> budgetGuard( BigDecimal limit ) {
+    return new Guard<OrderStates, OrderEvents>() {
+        @Override
+        public boolean evaluate(StateContext<OrderStates, OrderEvents> context) {
+            Order order = findOrder( context.getExtendedState() );
+            if ( order != null ) {
+                return order.getBudget().compareTo( limit ) == -1;
+            }
+            return true;
+        }
+    };  
+  }
 
 }
