@@ -60,6 +60,18 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
  
   // Actions 
   
+    // Utilità:  Ricerca l’ordine tra le variabili memorizzate nell’extended state
+    // L’interfaccia ExtendedState è utilizzata per arricchire lo stato dell’automa con variabili (di stato) aggiuntive.
+    // Un oggetto Order viene memorizzato nell’ExtendedState della macchina.
+    private Order findOrder( ExtendedState extendedState ) {
+      for ( Object obj : extendedState.getVariables().values() ) {
+          if ( obj instanceof Order ) {
+              return (Order) obj;
+          }
+      }
+      return null;
+    }
+
   public Action<OrderStates, OrderEvents> approveAction() {
     return new Action<OrderStates, OrderEvents>() {
       @Override
@@ -83,15 +95,6 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
           }
         }
       };
-  }
-
-  private Order findOrder( ExtendedState extendedState ) {
-    for ( Object obj : extendedState.getVariables().values() ) {
-        if ( obj instanceof Order ) {
-            return (Order) obj;
-        }
-    }
-    return null;
   }
 
   public Action<OrderStates, OrderEvents> entryAction() {
