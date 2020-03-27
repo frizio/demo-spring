@@ -1,6 +1,7 @@
 package cloud.frizio.dev.demospring.statemachine.order.automata;
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter
 
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
+import org.springframework.statemachine.guard.Guard;
 
 import cloud.frizio.dev.demospring.statemachine.order.bean.Order;
 
@@ -57,9 +59,11 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
         .target(OrderStates.CANCELLED)
         .event(OrderEvents.CANCEL);
   }
- 
-  // Actions 
-  
+
+  //------------------------------------------------------------------------------------------------------
+  // ACTIONS
+  //------------------------------------------------------------------------------------------------------
+    
     // Utilità:  Ricerca l’ordine tra le variabili memorizzate nell’extended state
     // L’interfaccia ExtendedState è utilizzata per arricchire lo stato dell’automa con variabili (di stato) aggiuntive.
     // Un oggetto Order viene memorizzato nell’ExtendedState della macchina.
@@ -104,15 +108,21 @@ public class PurchaseOrderConfig extends EnumStateMachineConfigurerAdapter<Order
             System.out.println( "Entering IN state " + context.getTarget().getId() );
         }
     };
-}
-    
-public Action<OrderStates, OrderEvents> exitAction() {
-    return new Action<OrderStates, OrderEvents>() {
-        @Override
-        public void execute(StateContext<OrderStates, OrderEvents> context) {
-            System.out.println( "Exiting FROM state " + context.getSource().getId() );
-        }
-    };
-}
+  }
+      
+  public Action<OrderStates, OrderEvents> exitAction() {
+      return new Action<OrderStates, OrderEvents>() {
+          @Override
+          public void execute(StateContext<OrderStates, OrderEvents> context) {
+              System.out.println( "Exiting FROM state " + context.getSource().getId() );
+          }
+      };
+  }
+
+  //---------------------------------------------------------------------------
+  // GUARDS
+  //---------------------------------------------------------------------------
+
+  
 
 }
